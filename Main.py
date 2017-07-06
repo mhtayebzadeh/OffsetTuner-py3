@@ -9,7 +9,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QApplication, QDialog, QFileDialog
 from collections import OrderedDict
-import serial
+import serial, time
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -523,7 +523,7 @@ class Ui_MainWindow(object):
         self.mainValues =[]
 
         try:
-            self.ser = serial.Serial('/dev/tty.usbmodem1421', 115200)
+            self.ser = serial.Serial('/dev/tty.usbmodem1411', 115200)
             self.flag = True
         except:
             print("Port not found")
@@ -532,8 +532,8 @@ class Ui_MainWindow(object):
         self.actionSave.triggered.connect(self.saveFile)
         self.actionOpen.triggered.connect(self.openFile)
 
-        #self.stopBtn.clicked.connect(self.stopRobot)
-        #self.startBtn.clicked.connect(self.startRobot)
+        self.stopBtn.clicked.connect(self.stopRobot)
+        self.startBtn.clicked.connect(self.startRobot)
 
         #My Code Finished
 
@@ -645,6 +645,119 @@ class Ui_MainWindow(object):
                 seq[cnt].setValue(float(line[1]))
                 cnt += 1
         myFile.close()
+
+    def generateFormule(self, value):
+            return int((value * 100) + 100)
+
+    def stopRobot(self):
+        if(self.flag):
+            #myArr = bytearray([254, 100, 100, 100, 112, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+            myArr = bytearray(self.generateStop())
+            self.ser.write(myArr)
+        else:
+            print("Not Connected to Robot")
+
+    def startRobot(self):
+        if(self.flag):
+            #myArr = bytearray([254, 100, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+            myArr = bytearray(self.generateStart())
+            print(myArr)
+            self.ser.write(myArr)
+            #ime.sleep(0.5)
+            #self.stopRobot()
+        else:
+            #print(self.generateStart())
+            print ("Not connected to Robot")
+
+    def generateStart(self):
+
+        values = []
+        values.append(254)
+        values.append(100)
+        values.append(100)
+        values.append(100)
+        values.append(100)
+        values.append(int(self.comXSpin.value()))
+        values.append(int(self.comYSpin.value()))
+        values.append(int(self.comZSpin.value()))
+        values.append(self.generateFormule(self.comRollSpin.value()))
+        values.append(self.generateFormule(self.comPitchSpin.value()))
+        values.append(self.generateFormule(self.comYawSpin.value()))
+
+        values.append(self.generateFormule(self.lHipYawSpin.value()))
+        values.append(self.generateFormule(self.lHipRollSpin.value()))
+        values.append(self.generateFormule(self.lHipPitchSpin.value()))
+        values.append(self.generateFormule(self.lKneeSpin.value()))
+        values.append(self.generateFormule(self.lFootPitchSpin.value()))
+        values.append(self.generateFormule(self.lFootRollSpin.value()))
+
+        values.append(self.generateFormule(self.rHipYawSpin.value()))
+        values.append(self.generateFormule(self.rHipRollSpin.value()))
+        values.append(self.generateFormule(self.rHipPitchSpin.value()))
+        values.append(self.generateFormule(self.rKneeSpin.value()))
+        values.append(self.generateFormule(self.rFootPitchSpin.value()))
+        values.append(self.generateFormule(self.rFootRollSpin.value()))
+
+        values.append(int(self.lXSpin.value()))
+        values.append(int(self.lYSpin.value()))
+        values.append(int(self.lZSpin.value()))
+        values.append(self.generateFormule(self.lRollSpin.value()))
+        values.append(self.generateFormule(self.lPitchSpin.value()))
+        values.append(self.generateFormule(self.lYawSpin.value()))
+
+        values.append(int(self.rXSpin.value()))
+        values.append(int(self.rYSpin.value()))
+        values.append(int(self.rZSpin.value()))
+        values.append(self.generateFormule(self.rRollSpin.value()))
+        values.append(self.generateFormule(self.rPitchSpin.value()))
+        values.append(self.generateFormule(self.rYawSpin.value()))
+
+        return values
+
+    def generateStop(self):
+        values = []
+        values.append(254)
+        values.append(0)
+        values.append(0)
+        values.append(0)
+        values.append(112)
+        values.append(int(self.comXSpin.value()))
+        values.append(int(self.comYSpin.value()))
+        values.append(int(self.comZSpin.value()))
+        values.append(self.generateFormule(self.comRollSpin.value()))
+        values.append(self.generateFormule(self.comPitchSpin.value()))
+        values.append(self.generateFormule(self.comYawSpin.value()))
+
+        values.append(self.generateFormule(self.lHipYawSpin.value()))
+        values.append(self.generateFormule(self.lHipRollSpin.value()))
+        values.append(self.generateFormule(self.lHipPitchSpin.value()))
+        values.append(self.generateFormule(self.lKneeSpin.value()))
+        values.append(self.generateFormule(self.lFootPitchSpin.value()))
+        values.append(self.generateFormule(self.lFootRollSpin.value()))
+
+        values.append(self.generateFormule(self.rHipYawSpin.value()))
+        values.append(self.generateFormule(self.rHipRollSpin.value()))
+        values.append(self.generateFormule(self.rHipPitchSpin.value()))
+        values.append(self.generateFormule(self.rKneeSpin.value()))
+        values.append(self.generateFormule(self.rFootPitchSpin.value()))
+        values.append(self.generateFormule(self.rFootRollSpin.value()))
+
+        values.append(int(self.lXSpin.value()))
+        values.append(int(self.lYSpin.value()))
+        values.append(int(self.lZSpin.value()))
+        values.append(self.generateFormule(self.lRollSpin.value()))
+        values.append(self.generateFormule(self.lPitchSpin.value()))
+        values.append(self.generateFormule(self.lYawSpin.value()))
+
+        values.append(int(self.rXSpin.value()))
+        values.append(int(self.rYSpin.value()))
+        values.append(int(self.rZSpin.value()))
+        values.append(self.generateFormule(self.rRollSpin.value()))
+        values.append(self.generateFormule(self.rPitchSpin.value()))
+        values.append(self.generateFormule(self.rYawSpin.value()))
+
+        return values
+
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
