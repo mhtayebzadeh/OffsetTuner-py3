@@ -1,0 +1,34 @@
+WEP[P_COM_X_offset] = 6.0;
+WEP[P_COM_Y_offset] = 30.0;
+WEP[P_COM_Z_offset] = 105.0;
+WEP[P_COM_Roll_offset] = 0.0;
+WEP[P_COM_Pitch_offset] = -0.08;
+WEP[P_COM_Yaw_offset] = 0.0;
+
+WEP[P_Left_Leg_Hip_Yaw_Offset] = -0.1;
+WEP[P_Left_Leg_Hip_Roll_Offset] = -0.21;
+WEP[P_Left_Leg_Hip_Pitch_Offset] = 0.1;
+WEP[P_Left_Leg_Knee_Offset] = 0.0;
+WEP[P_Left_Leg_Foot_Pitch_Offset] = 0.08;
+WEP[P_Left_Leg_Foot_Roll_Offset] = 0.1;
+
+WEP[P_Right_Leg_Hip_Yaw_Offset] = 0.08;
+WEP[P_Right_Leg_Hip_Roll_Offset] = -0.06;
+WEP[P_Right_Leg_Hip_Pitch_Offset] = 0.21;
+WEP[P_Right_Leg_Knee_Offset] = 2.9;
+WEP[P_Right_Leg_Foot_Pitch_Offset] = 0.19;
+WEP[P_Right_Leg_Foot_Roll_Offset] = 0.09;
+
+WEP[P_Left_Leg_X_Offset] = 24.0;
+WEP[P_Left_Leg_Y_Offset] = 60.0;
+WEP[P_Left_Leg_Z_Offset] = 0.0;
+WEP[P_Left_Leg_Roll_Offset] = 0.05;
+WEP[P_Left_Leg_Pitch_Offset] = 0.0;
+WEP[P_Left_Leg_Yaw_Offset] = 0.0;
+
+WEP[P_Right_Leg_X_Offset] = -14.0;
+WEP[P_Right_Leg_Y_Offset] = 35.0;
+WEP[P_Right_Leg_Z_Offset] = 0.0;
+WEP[P_Right_Leg_Roll_Offset] = 0.0;
+WEP[P_Right_Leg_Pitch_Offset] = 0.0;
+WEP[P_Right_Leg_Yaw_Offset] = 0.0;
