@@ -684,13 +684,13 @@ class Ui_MainWindow(object):
         else:
             values.append(1)
 
-        values.append(int(math.fabs(int(math.fabs(self.comYSpin.value())))))
+        values.append(int(math.fabs(int(self.comYSpin.value()))))
         if(int(self.comYSpin.value()) >= 0):
             values.append(0)
         else:
             values.append(1)
 
-        values.append(int(math.fabs(int(math.fabs(self.comZSpin.value())))))
+        values.append(int(math.fabs(int(self.comZSpin.value()))))
         if(int(self.comZSpin.value()) >= 0):
             values.append(0)
         else:
@@ -714,13 +714,13 @@ class Ui_MainWindow(object):
         values.append(self.generateFormule(self.rFootPitchSpin.value()))
         values.append(self.generateFormule(self.rFootRollSpin.value()))
 
-        values.append(int(math.fabs(int(math.fabs(self.lXSpin.value())))))
+        values.append(int(math.fabs(int(self.lXSpin.value()))))
         if(int(self.lXSpin.value()) >= 0):
             values.append(0)
         else:
             values.append(1)
 
-        values.append(int(math.fabs(int(math.fabs(self.lYSpin.value())))))
+        values.append(int(math.fabs(int(self.lYSpin.value()))))
         if(int(self.lYSpin.value()) >= 0):
             values.append(0)
         else:
