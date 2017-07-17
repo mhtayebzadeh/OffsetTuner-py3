@@ -9,7 +9,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QApplication, QDialog, QFileDialog
 from collections import OrderedDict
-import serial, time
+import serial, time, math
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -677,9 +677,25 @@ class Ui_MainWindow(object):
         values.append(100)
         values.append(100)
         values.append(100)
-        values.append(int(self.comXSpin.value()))
-        values.append(int(self.comYSpin.value()))
-        values.append(int(self.comZSpin.value()))
+
+        values.append(int(math.fabs(int(self.comXSpin.value()))))
+        if(int(self.comXSpin.value()) >= 0):
+            values.append(0)
+        else:
+            values.append(1)
+
+        values.append(int(math.fabs(int(math.fabs(self.comYSpin.value())))))
+        if(int(self.comYSpin.value()) >= 0):
+            values.append(0)
+        else:
+            values.append(1)
+
+        values.append(int(math.fabs(int(math.fabs(self.comZSpin.value())))))
+        if(int(self.comZSpin.value()) >= 0):
+            values.append(0)
+        else:
+            values.append(1)
+
         values.append(self.generateFormule(self.comRollSpin.value()))
         values.append(self.generateFormule(self.comPitchSpin.value()))
         values.append(self.generateFormule(self.comYawSpin.value()))
@@ -698,16 +714,46 @@ class Ui_MainWindow(object):
         values.append(self.generateFormule(self.rFootPitchSpin.value()))
         values.append(self.generateFormule(self.rFootRollSpin.value()))
 
-        values.append(int(self.lXSpin.value()))
-        values.append(int(self.lYSpin.value()))
-        values.append(int(self.lZSpin.value()))
+        values.append(int(math.fabs(int(math.fabs(self.lXSpin.value())))))
+        if(int(self.lXSpin.value()) >= 0):
+            values.append(0)
+        else:
+            values.append(1)
+
+        values.append(int(math.fabs(int(math.fabs(self.lYSpin.value())))))
+        if(int(self.lYSpin.value()) >= 0):
+            values.append(0)
+        else:
+            values.append(1)
+
+        values.append(int(math.fabs(int(self.lZSpin.value()))))
+        if(int(self.lZSpin.value()) >= 0):
+            values.append(0)
+        else:
+            values.append(1)
+
         values.append(self.generateFormule(self.lRollSpin.value()))
         values.append(self.generateFormule(self.lPitchSpin.value()))
         values.append(self.generateFormule(self.lYawSpin.value()))
 
-        values.append(int(self.rXSpin.value()))
-        values.append(int(self.rYSpin.value()))
-        values.append(int(self.rZSpin.value()))
+        values.append(int(math.fabs(int(self.rXSpin.value()))))
+        if(int(self.rXSpin.value()) >= 0):
+            values.append(0)
+        else:
+            values.append(1)
+
+        values.append(int(math.fabs(int(self.rYSpin.value()))))
+        if(int(self.rYSpin.value()) >= 0):
+            values.append(0)
+        else:
+            values.append(1)
+
+        values.append(int(math.fabs(int(self.rZSpin.value()))))
+        if(int(self.rZSpin.value()) >= 0):
+            values.append(0)
+        else:
+            values.append(1)
+
         values.append(self.generateFormule(self.rRollSpin.value()))
         values.append(self.generateFormule(self.rPitchSpin.value()))
         values.append(self.generateFormule(self.rYawSpin.value()))
